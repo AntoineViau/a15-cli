@@ -17,6 +17,8 @@ var camelizedName = camelize(dashedName);
 var capitalizedName = camelizedName.charAt(0).toUpperCase() + camelizedName.slice(1);
 var directory = process.argv[5];
 
+
+
 if (_.find(['generate', 'g'], () => command) &&
     _.find(['component', 'c'], () => type)) {
     if (!name) {
@@ -28,7 +30,7 @@ if (_.find(['generate', 'g'], () => command) &&
 
     mkdirp.sync(directory + '/' + dashedName);
 
-    var layout = 'layout/component.js.twig';
+    var layout = __dirname + '/../layout/component.js.twig';
     var templated = twig({
             path: layout,
             async: false
@@ -43,7 +45,7 @@ if (_.find(['generate', 'g'], () => command) &&
     fs.writeFileSync(directory + '/' + dashedName + '/' + dashedName + '.component.js', templated);
     fs.writeFileSync(directory + '/' + dashedName + '/' + dashedName + '.component.css', '');
 
-    layout = 'layout/index.js.twig';
+    layout = __dirname + '/../layout/index.js.twig';
     templated = twig({
             path: layout,
             async: false
